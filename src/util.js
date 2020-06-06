@@ -6,4 +6,16 @@ const getRandonInteger = (limit) => {
     return Math.floor(Math.random() * limit) + 1
 }
 
-export { getRandonInteger }
+let canCallThrottle = false
+
+function throttle(callback, delay) {
+    if (!canCallThrottle) {
+        callback()
+        canCallThrottle = true
+        canCallThrottle = setTimeout(() => {
+            canCallThrottle = false
+        }, delay);
+    }
+}
+
+export { getRandonInteger, throttle }

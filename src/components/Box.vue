@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { getRandonInteger } from "../util";
+import { getRandonInteger, throttle } from "../util";
 export default {
   name: "Box",
   data: () => ({
@@ -21,10 +21,16 @@ export default {
   methods: {
     clickOnBox: function() {
       this.countClick++;
+      throttle(this.changeBoxColor, 1000);
+    },
+    incrementCountClick: function() {
+      this.countClick++;
+    },
+    changeBoxColor: function() {
       const randonColor = this.colors[getRandonInteger(this.colors.length)];
       const boxElement = document.querySelector(".box");
       if (boxElement) {
-        boxElement.style.backgroundColor = randonColor;
+        boxElement.style.background = randonColor;
       }
     }
   }
@@ -36,6 +42,5 @@ export default {
   transition: all 0.7s;
   height: 100%;
   width: 100%;
-  border: 1px solid black;
 }
 </style>

@@ -130,6 +130,10 @@ export default {
   display: flex;
   align-items: center;
 
+  @media screen and (max-width: 900px) {
+    display: inline
+  }
+
   h2 {
     color: #fff;
     text-shadow: 3px 3px 2px #000000;
@@ -143,6 +147,17 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
+
+
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      padding: 15px 0;
+      top: 25px;
+
+      h2 {
+        font-size: 17px;
+      }
+    }
     h2 {
       margin: 0;
     }
@@ -163,6 +178,13 @@ export default {
       padding: 15px 5px;
       width: 300px;
       margin: 0 auto;
+    }
+
+    @media screen and (max-width: 900px) {
+      float: none!important;
+      width: 100%!important;
+      height: 50%;
+      border: none!important;
     }
   }
 

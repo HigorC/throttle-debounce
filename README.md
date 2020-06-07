@@ -20,5 +20,5 @@ Every time the click function is dispatch, is called a function to change color 
 
 The debounce function is also used on all application counters. If the click event don't be triggered at least 5 seconds, all conters will be reset.
 
-![Screenshoot](/public/src/assets/prints/ss1.png)
+![Screenshoot](/src/assets/prints/ss1.png)
 

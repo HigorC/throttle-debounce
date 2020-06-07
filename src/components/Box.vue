@@ -152,7 +152,7 @@ export default {
     @media screen and (max-width: 900px) {
       width: 100%;
       padding: 15px 0;
-      top: 25px;
+      top: 50%;
 
       h2 {
         font-size: 17px;
@@ -185,6 +185,7 @@ export default {
       width: 100%!important;
       height: 50%;
       border: none!important;
+      box-shadow: none!important;
     }
   }
 

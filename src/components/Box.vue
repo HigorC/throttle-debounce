@@ -34,14 +34,14 @@ export default {
       });
       //Listener to throttle
       boxElement.addEventListener(
-        "click", throttle(() => this.changeBoxColor(".throttle-area", that.throttleInfos), 1500)
+        "click", throttle(() => this.changeBoxColor(".throttle-area", that.throttleInfos), 1000)
       );
       //Listener to debounce
       boxElement.addEventListener(
-        "click", debounce(() => this.changeBoxColor(".debounce-area", that.debounceInfos), 1500)
+        "click", debounce(() => this.changeBoxColor(".debounce-area", that.debounceInfos), 1000)
       );
       //Listener to reset all counters
-      boxElement.addEventListener("click", debounce(() => that.resetCounters(), 3000)
+      boxElement.addEventListener("click", debounce(() => that.resetCounters(), 5000)
       );
     }
   },
@@ -114,9 +114,9 @@ export default {
       if (boxElement) {
         setTimeout(() => {
           boxElement.style.background = randonColor;
-        }, 100);
+        }, 50);
       }
-      
+
       objInfo.countChange++;
     }
   }

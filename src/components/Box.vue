@@ -8,17 +8,20 @@
       </h2>
     </div>
     <div class="throttle-area">
-      <h2>Mas a função Throttle só deixou a cor mudar {{throttleInfos.countChange}} vezes</h2>
+      <FunctionCart :functionInfos="throttleInfos" />
     </div>
     <div class="debounce-area">
-      <h2>Mas a função Debounce só deixou a cor mudar {{debounceInfos.countChange}} vezes</h2>
+      <FunctionCart :functionInfos="debounceInfos" />
     </div>
   </div>
 </template>
 <script>
 import { getRandonInteger, throttle, debounce } from "../util";
+import FunctionCart from "./FunctionCard.vue";
+
 export default {
   name: "Box",
+  components: { FunctionCart },
   mounted: function() {
     const that = this;
     const boxElement = document.querySelector(".box");
@@ -47,10 +50,12 @@ export default {
   data: () => ({
     countClick: 0,
     throttleInfos: {
+      name: 'Throttle',
       countChange: 0,
       indexActualRandonColor: -1
     },
     debounceInfos: {
+      name: 'Debounce',
       countChange: 0,
       indexActualRandonColor: -1
     },
@@ -74,7 +79,7 @@ export default {
   computed: {},
   methods: {
     resetCounters: function() {
-      const interval = setInterval(()=> {
+      const interval = setInterval(() => {
         if (this.countClick > 0) {
           this.countClick--;
         }
@@ -85,7 +90,12 @@ export default {
           this.debounceInfos.countChange--;
         }
 
-        if (this.countClick + this.throttleInfos.countChange + this.debounceInfos.countChange === 0)  {
+        if (
+          this.countClick +
+            this.throttleInfos.countChange +
+            this.debounceInfos.countChange ===
+          0
+        ) {
           clearInterval(interval);
         }
       }, 20);
@@ -117,17 +127,14 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
-
 .box {
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
+
   h2 {
-    @extend .noselect;
-    font-family: "Press Start 2P", cursive;
-    color: #ccc;
+    color: #fff;
     text-shadow: 3px 3px 2px #000000;
   }
 
@@ -137,12 +144,10 @@ export default {
     top: 7%;
     width: 550px;
     left: 50%;
-    // margin-right: -50%;
     transform: translate(-50%, -50%);
     h2 {
       margin: 0;
     }
-    // margin-top: 5%;
     position: absolute;
   }
 
@@ -154,6 +159,27 @@ export default {
     width: 50%;
     display: flex;
     align-items: center;
+    color: #ffffff;
+    line-height: 25px;
+
+    // .name-function,
+    // .count {
+    //   padding: 5px;
+    //   background-color: white;
+    //   color: black;
+    //   font-weight: bold;
+    // }
+
+    // .description {
+    //   width: 80%;
+    //   margin: 0 auto;
+    // }
+    .title {
+      background-color: black;
+      padding: 15px 5px;
+      width: 300px;
+      margin: 0 auto;
+    }
   }
 
   .throttle-area {
@@ -163,15 +189,6 @@ export default {
   .debounce-area {
     float: right;
   }
-}
-
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 </style>
  

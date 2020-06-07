@@ -10,6 +10,7 @@
 </template>
 
 <script>
+
 export default {
   props: ["functionInfos"]
 };
@@ -23,7 +24,6 @@ export default {
   font-weight: bold;
   text-shadow: none;
   box-shadow: 0px 0px 20px #fff;
-  // animation: pulse 2s linear 2s infinite alternate;
 
   &.count {
     font-size: 25px;

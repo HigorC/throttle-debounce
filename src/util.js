@@ -1,5 +1,3 @@
-import { setTimeout } from "core-js"
-
 /**
  * Returns a randon intenger in a limit range
  * @param { Number } limit 
@@ -14,6 +12,15 @@ const getRandonInteger = (limit, ...except) => {
     return generatedInt
 }
 
+/**
+ * Funnels the event call at a certain time.
+ * When the timeout expires, just the last call will triger the callback.
+ * This function use closure concecpt, so the canCallThrottle continue on the same scope,
+ * even the function being called n times.
+ * @param { Function } callback 
+ * @param { Number } delay 
+ * @returns { Function }
+ */
 function throttle(callback, delay) {
     let canCallThrottle
 
@@ -28,14 +35,21 @@ function throttle(callback, delay) {
     }
 }
 
-const debounce = (fn, time) => {
+/**
+ * Debaunce all funtion call at a certain time, allowing the passaged just of the last one.
+ * This function use closure concecpt, so the canCallThrottle continue on the same scope,
+ * even the function being called n times.
+ * @param { Function } callback 
+ * @param { Number } delay 
+ */
+const debounce = (callback, delay) => {
     let timeout;
 
     return function () {
         clearTimeout(timeout);
         timeout = setTimeout(
-            () => fn.apply(this, arguments),
-            time
+            () => callback.apply(this, arguments),
+            delay
         );
     }
 }

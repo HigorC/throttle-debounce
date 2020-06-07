@@ -25,29 +25,23 @@ export default {
   mounted: function() {
     const that = this;
     const boxElement = document.querySelector(".box");
+    
     if (boxElement) {
+      //Listener to update general count
       boxElement.addEventListener("click", () => {
         this.countClick++;
         document.querySelector(".general-count strong").style.fonts;
       });
-
+      //Listener to throttle
       boxElement.addEventListener(
-        "click",
-        throttle(
-          () => this.changeBoxColor(".throttle-area", that.throttleInfos),
-          1500
-        )
+        "click", throttle(() => this.changeBoxColor(".throttle-area", that.throttleInfos), 1500)
       );
+      //Listener to debounce
       boxElement.addEventListener(
-        "click",
-        debounce(
-          () => this.changeBoxColor(".debounce-area", that.debounceInfos),
-          1500
-        )
+        "click", debounce(() => this.changeBoxColor(".debounce-area", that.debounceInfos), 1500)
       );
-      boxElement.addEventListener(
-        "click",
-        debounce(() => that.resetCounters(), 3000)
+      //Listener to reset all counters
+      boxElement.addEventListener("click", debounce(() => that.resetCounters(), 3000)
       );
     }
   },
@@ -81,6 +75,10 @@ export default {
     ]
   }),
   methods: {
+    /**
+     * Reset all counters, unit per unit
+     * @returns { Void }
+     */
     resetCounters: function() {
       const interval = setInterval(() => {
         if (this.countClick > 0) {
@@ -92,34 +90,34 @@ export default {
         if (this.debounceInfos.countChange > 0) {
           this.debounceInfos.countChange--;
         }
-
-        if (
-          this.countClick +
-            this.throttleInfos.countChange +
-            this.debounceInfos.countChange ===
-          0
-        ) {
+        if (this.countClick + this.throttleInfos.countChange + this.debounceInfos.countChange === 0) {
           clearInterval(interval);
         }
       }, 20);
     },
+    /**
+     * Change element background to a randon color
+     * @param { String } selector
+     * @param { Object } objInfo infos of debounce/throttle functions
+     * 
+     */
     changeBoxColor: function(selector, objInfo) {
-      objInfo.indexActualRandonColor = this.getRandonColor();
+      objInfo.indexActualRandonColor = getRandonInteger(
+        this.colors.length,
+        this.throttleInfos.indexActualRandonColor,
+        this.debounceInfos.indexActualRandonColor
+      );
+
       const randonColor = this.colors[objInfo.indexActualRandonColor];
       const boxElement = document.querySelector(selector);
+
       if (boxElement) {
         setTimeout(() => {
           boxElement.style.background = randonColor;
         }, 100);
       }
+      
       objInfo.countChange++;
-    },
-    getRandonColor: function() {
-      return getRandonInteger(
-        this.colors.length,
-        this.throttleInfos.indexActualRandonColor,
-        this.debounceInfos.indexActualRandonColor
-      );
     }
   }
 };
@@ -144,10 +142,10 @@ export default {
     width: 550px;
     left: 50%;
     transform: translate(-50%, -50%);
+    position: absolute;
     h2 {
       margin: 0;
     }
-    position: absolute;
   }
 
   .throttle-area,

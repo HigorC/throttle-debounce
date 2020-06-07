@@ -4,10 +4,10 @@ import { setTimeout } from "core-js"
  * Returns a randon intenger in a limit range
  * @param { Number } limit 
  */
-const getRandonInteger = (limit, lastGenerated) => {
+const getRandonInteger = (limit, ...except) => {
     let generatedInt = Math.floor(Math.random() * limit) + 1
 
-    while (generatedInt === lastGenerated) {
+    while (except.includes(generatedInt)) {
         generatedInt = Math.floor(Math.random() * limit) + 1
     }
 
@@ -27,7 +27,6 @@ function throttle(callback, delay) {
         }
     }
 }
-
 
 const debounce = (fn, time) => {
     let timeout;

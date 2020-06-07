@@ -21,17 +21,19 @@ export default {
   background-color: white;
   color: black;
   font-weight: bold;
-      text-shadow: none;
-          box-shadow: 0px 0px 20px #fff;
-          &.count {
-              font-size: 25px;
-              padding: 10px 5px;
-          }
+  text-shadow: none;
+  box-shadow: 0px 0px 20px #fff;
+  // animation: pulse 2s linear 2s infinite alternate;
+
+  &.count {
+    font-size: 25px;
+    padding: 10px 5px;
+  }
 }
 
 .description {
   width: 70%;
   margin: 0 auto;
-      text-shadow: 3px 3px 2px #000000;
+  text-shadow: 3px 3px 2px #000000;
 }
 </style>

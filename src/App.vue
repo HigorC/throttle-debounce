@@ -46,4 +46,10 @@ body,
   text-align: center;
   color: #2c3e50;
 }
+
+// @keyframes pulse {
+//   0%   {box-shadow: 0px 0px 10px #fff;}
+//   55%   {box-shadow: 0px 0px 25px #fff;}
+//   100%  {box-shadow: 0px 0px 10px #fff;}
+// }
 </style>

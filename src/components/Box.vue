@@ -26,7 +26,11 @@ export default {
     const that = this;
     const boxElement = document.querySelector(".box");
     if (boxElement) {
-      boxElement.addEventListener("click", () => this.countClick++);
+      boxElement.addEventListener("click", () => {
+        this.countClick++;
+        document.querySelector(".general-count strong").style.fonts;
+      });
+
       boxElement.addEventListener(
         "click",
         throttle(
@@ -50,12 +54,12 @@ export default {
   data: () => ({
     countClick: 0,
     throttleInfos: {
-      name: 'Throttle',
+      name: "Throttle",
       countChange: 0,
       indexActualRandonColor: -1
     },
     debounceInfos: {
-      name: 'Debounce',
+      name: "Debounce",
       countChange: 0,
       indexActualRandonColor: -1
     },
@@ -76,7 +80,6 @@ export default {
       "#8F00FF"
     ]
   }),
-  computed: {},
   methods: {
     resetCounters: function() {
       const interval = setInterval(() => {
@@ -100,19 +103,8 @@ export default {
         }
       }, 20);
     },
-    clickOnBox: function() {
-      this.countClick++;
-      const that = this;
-      throttle(
-        () => this.changeBoxColor(".throttle-area", that.throttleInfos),
-        1000
-      );
-    },
     changeBoxColor: function(selector, objInfo) {
-      objInfo.indexActualRandonColor = getRandonInteger(
-        this.colors.length,
-        objInfo.indexActualRandonColor
-      );
+      objInfo.indexActualRandonColor = this.getRandonColor();
       const randonColor = this.colors[objInfo.indexActualRandonColor];
       const boxElement = document.querySelector(selector);
       if (boxElement) {
@@ -121,6 +113,13 @@ export default {
         }, 100);
       }
       objInfo.countChange++;
+    },
+    getRandonColor: function() {
+      return getRandonInteger(
+        this.colors.length,
+        this.throttleInfos.indexActualRandonColor,
+        this.debounceInfos.indexActualRandonColor
+      );
     }
   }
 };
@@ -153,7 +152,6 @@ export default {
 
   .throttle-area,
   .debounce-area {
-    background-color: #34343a;
     transition: all 0.7s;
     height: 100%;
     width: 50%;
@@ -162,18 +160,6 @@ export default {
     color: #ffffff;
     line-height: 25px;
 
-    // .name-function,
-    // .count {
-    //   padding: 5px;
-    //   background-color: white;
-    //   color: black;
-    //   font-weight: bold;
-    // }
-
-    // .description {
-    //   width: 80%;
-    //   margin: 0 auto;
-    // }
     .title {
       background-color: black;
       padding: 15px 5px;
@@ -183,10 +169,16 @@ export default {
   }
 
   .throttle-area {
+    background-color: #fb7f39;
+    border-right: 1px solid #fff;
+    box-shadow: inset -8px 0 7px -8px #fff;
     float: left;
   }
 
   .debounce-area {
+    background-color: #6a6582;
+    border-left: 1px solid #fff;
+    box-shadow: inset 8px 0 7px -8px #fff;
     float: right;
   }
 }

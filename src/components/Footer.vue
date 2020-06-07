@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <p>
-      Make with
+      Made with
       <span>
         <i class="fas fa-heart"></i>
       </span>
